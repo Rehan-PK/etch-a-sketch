@@ -27,14 +27,21 @@ function selectBoxes() {
     return boxes;
 }
 
-// make function to create hover effect on grid
-function createHoverEffect() {
+// function to select the grid, & create hover effect for each cell of the grid
+function enableColorScroll() {
     selectBoxes();
     for (let i = 0; i < boxes.length; i++) {
-        boxes[i].addEventListener('mouseover', () => boxes[i].style.backgroundColor = 'lightgrey');
+        boxes[i].addEventListener('mouseover', () => createHoverEffect(i));
     }
 }
-createHoverEffect();
+
+// random color on each interaction with a cell
+function createHoverEffect(box) {
+    let color = `RGB(${Math.round(Math.random()*1000/2.55)},${Math.round(Math.random()*1000/2.55)}, ${Math.round(Math.random()*1000/2.55)})`;
+    boxes[box].style.backgroundColor = color;
+}
+enableColorScroll();
+
 
 // Function for deleting all cells in the container div
 function clearGrid() {
@@ -59,10 +66,11 @@ function getGridSize() {
     }
 }
 
+// 4 STEPS=> 1.clearGrid, 2.getGridSize, 3.drawGrid, 4.enableColorScroll
 button.addEventListener("click", clearGrid);
 button.addEventListener("click", getGridSize);
 button.addEventListener("click", () => drawGrid(gridCells));
-button.addEventListener("click", createHoverEffect);
+button.addEventListener("click", enableColorScroll);
 
 
 
@@ -135,3 +143,23 @@ button.addEventListener("click", createHoverEffect);
 // for (let i = 0; i < 10; i++) {
 //     container.removeChild(box1[i]);
 // }
+
+
+// make function to create hover effect on grid - OK
+// function createHoverEffect() {
+//     selectBoxes();
+//     for (let i = 0; i < boxes.length; i++) {
+//         boxes[i].addEventListener('mouseover', () => boxes[i].style.backgroundColor = 'lightgrey');
+//     }
+// }
+// createHoverEffect();
+
+// randomize the square RGB value - OK
+// function createHoverEffect() {
+//     selectBoxes();
+//     for (let i = 0; i < boxes.length; i++) {
+//         let color = `RGB(${Math.round(Math.random()*1000/2.55)},${Math.round(Math.random()*1000/2.55)}, ${Math.round(Math.random()*1000/2.55)})`;
+//         boxes[i].addEventListener('mouseover', () => boxes[i].style.backgroundColor = color);
+//     }
+// }
+// createHoverEffect();
