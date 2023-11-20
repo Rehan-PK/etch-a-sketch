@@ -9,7 +9,7 @@ function drawGrid(gridCells) {
             const div = document.createElement("div");
             const container = document.getElementById("container");
             container.appendChild(div);
-            console.log('child appended');
+            // console.log('div appended');
             div.style.width = gridWidth;
             div.style.border = "0.1px solid lightgrey";
             div.className = "box";
@@ -20,14 +20,14 @@ function drawGrid(gridCells) {
 // draw initial grid - OK
 drawGrid(gridCells);
 
-// Function to select all boxes
+// Function to select all boxes - OK
 let boxes;
 function selectBoxes() {
     boxes = document.querySelectorAll(".box");
     return boxes;
 }
 
-// function to select the grid, & create hover effect for each cell of the grid
+// function to select the grid, & create hover effect for each cell of the grid - OK
 function enableColorScroll() {
     selectBoxes();
     for (let i = 0; i < boxes.length; i++) {
@@ -35,15 +35,14 @@ function enableColorScroll() {
     }
 }
 
-// random color on each interaction with a cell
+// random color on each interaction with a cell - OK
 function createHoverEffect(box) {
     let color = `RGB(${Math.round(Math.random()*1000/2.55)},${Math.round(Math.random()*1000/2.55)}, ${Math.round(Math.random()*1000/2.55)})`;
     boxes[box].style.backgroundColor = color;
 }
 enableColorScroll();
 
-
-// Function for deleting all cells in the container div
+// Function for deleting all cells in the container div - OK
 function clearGrid() {
     selectBoxes();
     for (let i = 0; i < boxes.length; i++) {
@@ -51,10 +50,10 @@ function clearGrid() {
     }
 }
 
-// Button on top of screen, that sends user popup asking no. of squares
+// Button on top of screen, that sends user popup asking no. of squares - OK
 const button = document.getElementById("button");
 
-// function to get the custom size of grid
+// function to get the custom size of grid - OK
 function getGridSize() {
     gridCells = Number(prompt("Input the size of grid ? (between 1 & 100; both inclusive"));
     if (gridCells > 100 || gridCells < 1) {
@@ -66,12 +65,19 @@ function getGridSize() {
     }
 }
 
-// 4 STEPS=> 1.clearGrid, 2.getGridSize, 3.drawGrid, 4.enableColorScroll
+// 4 STEPS=> 1.clearGrid, 2.getGridSize, 3.drawGrid, 4.enableColorScroll - OK
 button.addEventListener("click", clearGrid);
 button.addEventListener("click", getGridSize);
 button.addEventListener("click", () => drawGrid(gridCells));
 button.addEventListener("click", enableColorScroll);
 
+// on mouse over
+// - store box reference in visitedBoxes
+// - create hover effect on the box (i.e. color it randomly)
+// - pass this color value & box reference to another function that will store box reference with color
+// - whenever a box mouseover event fires, check if the box is in visitedBoxes:
+//      -   if its, then fetch color value
+//      -   if it isn't, add it
 
 
 // existing grid removed & new grid generated as per no. of squares in same total space (960px)
